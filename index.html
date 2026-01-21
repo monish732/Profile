@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monish C - Computer Vision Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1a1f35;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            overflow: hidden;
+            border: 1px solid #2a3555;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2a4365 0%, #1e3a8a 100%);
+            color: white;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            border-bottom: 3px solid #3b82f6;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: left;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid #3b82f6;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            background: #2a3555;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #ffffff;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+            color: #e0e7ff;
+        }
+
+        .header-contact {
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: #e0e7ff;
+        }
+
+        .header-contact p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .main-content {
+            padding: 40px;
+            background: #1a1f35;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #60a5fa;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .objective {
+            background: linear-gradient(135deg, #232947 0%, #2a3555 100%);
+            padding: 30px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            color: #e5e7eb;
+            border: 1px solid #374151;
+        }
+
+        .objective h3 {
+            color: #60a5fa;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .objective strong {
+            color: #ffffff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            background: #232947;
+            border: 2px solid #3b82f6;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #60a5fa;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .skill-item:hover {
+            background: #3b82f6;
+            color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+            border-color: #60a5fa;
+        }
+
+        .project-card {
+            background: #232947;
+            border: 2px solid #374151;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .project-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            transform: translateX(5px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .project-title {
+            font-size: 1.5em;
+            color: #60a5fa;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .project-meta {
+            color: #9ca3af;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        .project-description {
+            color: #d1d5db;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .patent-highlight {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            border: 2px solid #3b82f6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .patent-highlight .project-title {
+            color: #ffffff;
+        }
+
+        .patent-highlight .project-description {
+            color: #e0e7ff;
+        }
+
+        .patent-highlight::before {
+            content: '🏆';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 3.5em;
+            opacity: 0.15;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #3b82f6;
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 8px 8px 0 0;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .patent-highlight .tag {
+            background: #60a5fa;
+            color: #0a0e27;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #2a4365 0%, #1e3a8a 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            border: 2px solid #3b82f6;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #ffffff;
+        }
+
+        .contact-info p {
+            font-size: 1.1em;
+            margin: 15px 0;
+            color: #e0e7ff;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .header {
+                padding: 40px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-content {
+                text-align: center;
+            }
+
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="mypic.jpg" alt="Monish C" width="180" height="180" class="profile-pic">
+            <div class="header-content">
+                <h1>Monish C</h1>
+                <p class="subtitle">Machine Learning Engineer | Data Scientist | Patent Holder</p>
+                <div class="header-contact">
+                    <p>📞 8220888927</p>
+                    <p>📧 monish.c2024@vitstudent.ac.in</p>
+                    <p>💼 linkedin.com/in/monish-c-34b0ab248</p>
+                    <p>📍 Chennai</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <section class="section">
+                <h2 class="section-title">About Me</h2>
+                <div class="objective">
+                    I am a highly motivated Software Engineering student with a strong passion for applied artificial intelligence, machine learning, and data science. My expertise spans deep learning, statistical analysis, and building scalable AI solutions using Python. I focus on developing production-ready intelligent systems that address real-world challenges through data-driven approaches and innovative hardware integration.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Career Objective</h2>
+                <div class="objective">
+                    I am a highly motivated, creative, and versatile individual with a strong focus on mastering both front-end and back-end technologies. My passion lies in using analytics and AI to address real-world problems through innovative and efficient solutions. I am eager to contribute to cutting-edge machine learning and data science projects while building production-ready intelligent systems.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">Machine Learning</div>
+                    <div class="skill-item">Deep Learning</div>
+                    <div class="skill-item">Data Science</div>
+                    <div class="skill-item">HTML</div>
+                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">TensorFlow</div>
+                    <div class="skill-item">MATLAB</div>
+                    <div class="skill-item">Statistical Analysis</div>
+                    <div class="skill-item">Web Development</div>
+                    <div class="skill-item">Photo Editing</div>
+                    <div class="skill-item">C, C++, Java</div>
+                    <div class="skill-item">Data Structures</div>
+                    <div class="skill-item">Operating Systems</div>
+                    <div class="skill-item">IoT & Sensors</div>
+                    <div class="skill-item">Cloud Tools</div>
+                    <div class="skill-item">Database Management</div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="objective">
+                    <h3>Bachelor of Technology</h3>
+                    <p style="font-size: 1.05em;"><strong>VIT University</strong></p>
+                    <p style="color: #9ca3af; margin-top: 8px;">2024 - 2028</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Featured Projects</h2>
+
+                <div class="project-card patent-highlight">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Patent: Intelligent Air Quality, Odor Control & Hygiene Management System</h3>
+                            <p class="project-meta">Inventor | Hardware & AI Integration | 2025</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Developed a Smart Self-Regulating Washroom System using multi-sensor fusion and AI-based predictive control for automated air quality management. Integrated adaptive BLDC ventilation, UV-C sterilization, and servo-controlled smart freshening for energy-efficient and hygienic operation. This patent demonstrates my ability to apply AI-driven techniques to real-world hardware challenges and design intelligent, impactful systems.
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="tag">AI/ML</span>
+                        <span class="tag">Hardware</span>
+                        <span class="tag">IoT</span>
+                        <span class="tag">Sensor Fusion</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Machine Learning for Flight Navigation Optimization</h3>
+                            <p class="project-meta">Team Member | AI Hackathons | 2024-2025</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Participated in competitive hackathons focused on applying machine learning to real-world domains like aircraft navigation and food distribution. Developed a data-driven model to optimize flight paths based on terrain data, distance, and weather conditions. Implemented route planning algorithms, obstacle avoidance logic, and resource allocation strategies using Python, geospatial libraries, and lightweight AI frameworks.
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="tag">Python</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Data Science</span>
+                        <span class="tag">Geospatial Analysis</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Soil Moisture Analysis & Agricultural Robotics</h3>
+                            <p class="project-meta">Individual Project | MATLAB & Data Science | 2024</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Designed and built an autonomous robot to measure and map soil moisture levels across agricultural fields. Utilized IoT sensors for data collection and MATLAB for real-time data visualization and statistical analysis. Applied data science techniques to identify patterns and provide actionable insights for improving irrigation efficiency and supporting precision agriculture decisions.
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">Data Science</span>
+                        <span class="tag">Robotics</span>
+                        <span class="tag">IoT Sensors</span>
+                        <span class="tag">Statistical Analysis</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">AI Chatbot Development</h3>
+                            <p class="project-meta">School Project | Python | 2023</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Developed a basic AI chatbot to answer common student queries related to school activities and academics. Implemented using Python, with logic built on pattern matching and early-stage natural language processing. Designed a simple text-based interface and handled user inputs dynamically. This project sparked my initial interest in AI and conversational systems.
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pattern Matching</span>
+                        <span class="tag">Text Processing</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="contact-info">
+                    <h2>Let's Connect</h2>
+                    <p>Thank you for visiting my profile. I would welcome the opportunity to discuss how my skills and experience in machine learning, data science, and AI-driven hardware system design can contribute to your organization.</p>
+                    <p style="margin-top: 25px; font-style: italic; opacity: 0.9;">The information furnished above is true to the best of my knowledge.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
