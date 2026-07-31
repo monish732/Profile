@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monish C </title>
+    <title>Monish C</title>
     <style>
         * {
             margin: 0;
@@ -72,6 +71,7 @@
             border: 5px solid #3b82f6;
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
             object-fit: cover;
+            object-position: center 65%;
             position: relative;
             z-index: 1;
             background: #2a3555;
@@ -82,6 +82,7 @@
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             color: #ffffff;
+            font-weight: 700;
         }
 
         .subtitle {
@@ -92,16 +93,46 @@
         }
 
         .header-contact {
-            margin-top: 20px;
-            font-size: 0.95em;
-            color: #e0e7ff;
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .header-contact p {
-            margin: 5px 0;
-            display: flex;
+        .header-contact a {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-contact a:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: #3b82f6;
+            color: #60a5fa;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .header-contact a svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .header-contact a:hover svg {
+            transform: scale(1.1);
         }
 
         .main-content {
@@ -146,24 +177,36 @@
 
         /* ── NEW SKILLS STYLES ── */
         .skills-categorized {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             margin-top: 10px;
+        }
+
+        @media (max-width: 992px) {
+            .skills-categorized {
+                grid-template-columns: 1fr;
+            }
         }
 
         .skill-category {
             background: #232947;
-            border-radius: 10px;
-            padding: 20px 28px;
+            border-radius: 12px;
+            padding: 24px;
             border: 1px solid #374151;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
         }
 
         .skill-category-title {
-            font-size: 1.15em;
+            font-size: 1.25em;
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             letter-spacing: 0.02em;
         }
 
@@ -172,13 +215,13 @@
             padding-left: 20px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .skill-list li {
             color: #d1d5db;
-            font-size: 1em;
-            line-height: 1.5;
+            font-size: 1.05em;
+            line-height: 1.6;
         }
         /* ── END NEW SKILLS STYLES ── */
 
@@ -225,6 +268,89 @@
             font-size: 1.05em;
         }
 
+        .github-link, .project-link {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(96, 165, 250, 0.05);
+        }
+
+        .github-link:hover, .project-link:hover {
+            color: #ffffff;
+            background: #3b82f6;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ── COLLAPSIBLE PROJECTS STYLES ── */
+        .more-projects-container {
+            display: none;
+            opacity: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease;
+        }
+
+        .more-projects-container.expanded {
+            display: block;
+            opacity: 1;
+        }
+
+        .toggle-btn-container {
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+
+        .toggle-btn {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 12px 30px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-btn:hover {
+            background: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .toggle-btn:active {
+            transform: translateY(0);
+        }
+
+        .toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-btn.expanded svg {
+            transform: rotate(180deg);
+        }
+
         .patent-highlight {
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
@@ -241,13 +367,17 @@
             color: #e0e7ff;
         }
 
-        .patent-highlight::before {
-            content: '🏆';
-            position: absolute;
-            top: 6px;
-            right: 12px;
-            font-size: 3.5em;
-            opacity: 0.75;
+        .patent-highlight .project-link {
+            color: #e0e7ff;
+            border-color: rgba(224, 231, 255, 0.35);
+            background: rgba(224, 231, 255, 0.05);
+        }
+
+        .patent-highlight .project-link:hover {
+            color: #ffffff;
+            background: rgba(224, 231, 255, 0.15);
+            border-color: rgba(224, 231, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(224, 231, 255, 0.2);
         }
 
         .tag {
@@ -266,6 +396,79 @@
             background: #60a5fa;
             color: #0a0e27;
         }
+
+        /* ── CERTIFICATIONS STYLES ── */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .cert-card {
+            background: #232947;
+            border: 1px solid #374151;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cert-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .cert-icon-wrapper {
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .cert-icon-wrapper svg {
+            width: 28px;
+            height: 28px;
+            color: #60a5fa;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .cert-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .cert-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .cert-issuer {
+            font-size: 0.95em;
+            color: #60a5fa;
+            font-weight: 500;
+        }
+
+        .cert-date {
+            font-size: 0.85em;
+            color: #9ca3af;
+        }
+        /* ── END CERTIFICATIONS STYLES ── */
 
         .contact-info {
             background: linear-gradient(135deg, #2a4365 0%, #1e3a8a 100%);
@@ -308,6 +511,7 @@
             .profile-pic {
                 width: 150px;
                 height: 150px;
+                border-radius: 50%;
             }
 
             .main-content {
@@ -330,55 +534,104 @@
             <img src="mypic123.jpg" alt="Monish C" width="180" height="180" class="profile-pic">
             <div class="header-content">
                 <h1>Monish C</h1>
-                <p class="subtitle">Computer Science UnderGraduate | Machine Learning Enthusiast | Patent Holder</p>
+                <p class="subtitle">Computer Science Engineering Undergraduate | AI & ML Enthusiast | Patent Holder</p>
                 <div class="header-contact">
-                    <p>📞 8220888927</p>
-                    <p>📧 monish08012007@gmail.com</p>
-                    <p>💼 www.linkedin.com/in/monish-c73</p>
-                    <p>🛠️ https://github.com/monish732</p>
+                    <a href="tel:8220888927">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        8220888927
+                    </a>
+                    <a href="mailto:monish08012007@gmail.com">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        monish08012007@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/monish-c73" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/monish732" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://leetcode.com/u/9Zd1OLmKVh/" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.88 9.88a1.374 1.374 0 0 0 0 1.942l4 4a1.374 1.374 0 0 0 1.94 0l9.88-9.88a1.373 1.373 0 0 0 0-1.942l-4-4a1.374 1.374 0 0 0-.979-.414zM8.528 17.144l-2.02 2.02a4.12 4.12 0 0 0 0 5.82 4.12 4.12 0 0 0 5.82 0l2.02-2.02a1.374 1.374 0 0 0-1.94-1.94l-2.02 2.02a1.374 1.374 0 0 1-1.94 0 1.374 1.374 0 0 1 0-1.94l2.02-2.02a1.374 1.374 0 0 0-1.94-1.94zM19.467 8.016l-3.23 3.23a1.374 1.374 0 0 0 1.94 1.94l3.23-3.23a1.374 1.374 0 0 0-1.94-1.94z"/>
+                        </svg>
+                        LeetCode
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="main-content">
             
-
             <section class="section">
                 <h2 class="section-title">Career Objective</h2>
                 <div class="objective">
                     I am a highly motivated, creative, and versatile individual with a strong focus on mastering advanced artificial intelligence, scalable system architectures, and data-driven technologies. I have a keen interest in designing and implementing intelligent systems that can address complex real-world problems efficiently and reliably. My passion lies in leveraging AI, machine learning, and data analytics to develop innovative, efficient, and impactful solutions for complex real-world challenges. I continuously seek opportunities to learn emerging technologies, optimize system performance, and contribute to cutting-edge research and development initiatives.
+                </div>
             </section>
 
             <section class="section">
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-categorized">
                     <div class="skill-category">
-                        <h3 class="skill-category-title">Data &amp; Machine Learning</h3>
+                        <h3 class="skill-category-title">Programming &amp; Development</h3>
                         <ul class="skill-list">
-                            <li>Data Analysis</li>
-                            <li>Principal Component Analysis (PCA)</li>
-                            <li>NumPy, Scikit-learn, PyTorch, TensorFlow – Basic</li>
-                            <li>Business Analytics</li>
-                            <li>Marketing Analytics</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 class="skill-category-title">Programming Languages</h3>
-                        <ul class="skill-list">
-                            <li>C, C++</li>
                             <li>Python</li>
                             <li>Java</li>
-                            <li>R</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 class="skill-category-title">Web Developing</h3>
-                        <ul class="skill-list">
+                            <li>C, C++</li>
+                            <li>SQL</li>
                             <li>HTML</li>
                             <li>CSS</li>
                             <li>JavaScript</li>
-                            <li>Node.js</li>
                             <li>React.js</li>
+                            <li>Node.js</li>
+                            <li>FastAPI</li>
+                            <li>REST APIs</li>
+                            <li>Web Scraping</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">AI &amp; Machine Learning</h3>
+                        <ul class="skill-list">
+                            <li>PyTorch</li>
+                            <li>TensorFlow</li>
+                            <li>Scikit-learn</li>
+                            <li>NumPy &amp; Pandas</li>
+                            <li>Machine Learning</li>
+                            <li>Deep Learning</li>
+                            <li>Computer Vision</li>
+                            <li>NLP</li>
+                            <li>RAG</li>
+                            <li>Vector Search</li>
+                            <li>LSTM</li>
+                            <li>Data Analysis &amp; EDA</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Cloud, DevOps &amp; Hardware</h3>
+                        <ul class="skill-list">
+                            <li>Docker</li>
+                            <li>Kubernetes</li>
+                            <li>Google Cloud Platform (GCP)</li>
+                            <li>AWS Cloud Services</li>
+                            <li>SQLite</li>
+                            <li>Git</li>
+                            <li>GitHub</li>
+                            <li>IoT &amp; Sensors</li>
+                            <li>Embedded Systems</li>
+                            <li>Microcontrollers</li>
+                            <li>Multi-Sensor Fusion</li>
+                            <li>Predictive Maintenance</li>
                         </ul>
                     </div>
                 </div>
@@ -387,9 +640,9 @@
             <section class="section">
                 <h2 class="section-title">Education</h2>
                 <div class="objective">
-                    <h3>BTech Computer Science & Engineering</h3>
+                    <h3>BTech Computer Science &amp; Engineering</h3>
                     <p style="font-size: 1.05em;"><strong>Vellore Institute of Technology, Chennai</strong></p>
-                    <p style="color: #9ca3af; margin-top: 8px;">CGPA - 9.59<br>2024 - Present</p>
+                    <p style="color: #9ca3af; margin-top: 8px;">CGPA - 9.66<br>2024 - Present</p>
                 </div>
             </section>
 
@@ -399,37 +652,77 @@
                 <div class="project-card patent-highlight">
                     <div class="project-header">
                         <div>
-                            <h3 class="project-title">Patent: Intelligent Air Quality, Odor Control & Hygiene Management System</h3>
-                            <p class="project-meta">Inventor | Hardware & AI Integration | [2025]</p>
+                            <h3 class="project-title">🏆 Patent: Intelligent Air Quality, Odor Control &amp; Hygiene Management System</h3>
+                            <p class="project-meta">IPR Patent Holder Inventor | IPR Application No: 202541133092 | [2025-2026]</p>
+                        </div>
+                        <div>
+                            <a href="https://drive.google.com/file/d/17vX9xj6oWSUd6hte4tWjpDcp1DNNrW--/view" target="_blank" class="project-link">
+                            View Patent Doc
+                            </a>
                         </div>
                     </div>
                     <p class="project-description">
                         Developed a Smart Self-Regulating Washroom System using multi-sensor fusion and AI-based predictive control for automated air quality management. Integrated adaptive BLDC ventilation, UV-C sterilization, and servo-controlled smart freshening for energy-efficient and hygienic operation. This patent demonstrates my ability to apply AI-driven techniques to real-world hardware challenges and design intelligent, impactful systems.
                     </p>
                     <div style="margin-top: 15px;">
-                        <span class="tag">AI/ML</span>
-                        <span class="tag">Hardware</span>
                         <span class="tag">IoT</span>
-                        <span class="tag">Sensor Fusion</span>
-                        <span class="tag">Automation</span>
+                        <span class="tag">Embedded Systems</span>
+                        <span class="tag">Multi-Sensor Fusion</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Predictive Maintenance</span>
+                        <span class="tag">Hardware</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Multimodal Marine Species Identification System</h3>
+                            <p class="project-meta">PyTorch | ConvNeXtV2 | AST | MPNet | [2026-Present]</p>
+                        </div>
+                        <div>
+                            <a href="https://github.com/monish732/Multimodal_Marine" target="_blank" class="github-link">
+                            View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Developed a multimodal AI alignment system mapping marine visual phenotypes (ConvNeXt-Base), bioacoustics (AST), and semantic taxonomies (all-mpnet-base-v2) into a shared latent space. Engineered double-normalized residual projection heads under symmetric supervised contrastive loss (SupCon) to align features, integrating Test-Time Augmentation (TTA) and Query Expansion (QE) to optimize cross&#8209;modal species retrieval and zero-shot discovery.
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">ConvNeXtV2</span>
+                        <span class="tag">AST</span>
+                        <span class="tag">MPNet</span>
+                        <span class="tag">Contrastive Learning</span>
+                        <span class="tag">TTA</span>
+                        <span class="tag">Query Expansion</span>
+                        <span class="tag">Zero-Shot Retrieval</span>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-header">
                         <div>
-                            <h3 class="project-title">Multimodal Marine Species Identification System</h3>
-                            <p class="project-meta">PyTorch | Vision Transformer | AST | LLM |[2026-Present] </p>
+                            <h3 class="project-title">Self-Evolving Retrieval-Augmented Generation (SERA) Framework</h3>
+                            <p class="project-meta">Python | FastAPI | SQLite | Local LLM | RAG | Vector Search | [2026-Present]</p>
+                        </div>
+                        <div>
+                            <a href="https://github.com/monish732/SERA" target="_blank" class="github-link">
+                            View on GitHub
+                            </a>
                         </div>
                     </div>
                     <p class="project-description">
-                        Developed a multimodal AI system integrating marine images and bioacoustics signals for cross-modal species identification. Used Vision Transformer (ViT) and Audio Spectrogram Transformer (AST) with shared embedding alignment, and incorporated LLM-based reasoning for explainable audio–image retrieval.
+                        Developed a self-evolving Retrieval-Augmented Generation (RAG) framework for intelligent medical knowledge retrieval using local LLM inference, semantic search, adaptive document indexing, query-driven retrieval, and automated validation. Improved retrieval accuracy, contextual reasoning, and scalable medical knowledge management through continuous knowledge refinement.
+                    </p>
                     <div style="margin-top: 15px;">
-                        <span class="tag">Marine Bioacoustics</span>
-                        <span class="tag">Vision Transformer </span>
-                        <span class="tag">Cross-Modal Alignment</span>
-                        <span class="tag">Contrastive Loss Optimization</span>
-                        <span class="tag">LLM</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Local LLM</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">Vector Search</span>
                     </div>
                 </div>
 
@@ -437,7 +730,7 @@
                     <div class="project-header">
                         <div>
                             <h3 class="project-title">AI-Driven Self-Healing Kubernetes System for Healthcare</h3>
-                            <p class="project-meta">Kubernetes | Python | LSTM | Docker |  [2026]</p>
+                            <p class="project-meta">Kubernetes | Python | LSTM | Docker | [2026-Present]</p>
                         </div>
                         <div>
                             <a href="https://github.com/monish732/k8s-ai-self-healing-autoscaler" target="_blank" class="github-link">
@@ -446,125 +739,261 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        Built an AI-based self-healing system for Kubernetes healthcare microservices with separation of critical and non-critical services. Implemented LSTM-driven failure prediction for proactive recovery. Designed a priority-aware controller to ensure high availability of critical services.
+                        Built an AI-powered self-healing orchestration system for Kubernetes healthcare microservices. Deployed using Minikube and Docker, the&nbsp;system leverages a tuned metrics-server to stream real-time CPU/memory metrics. An AI engine dynamically forecasts system stress, triggering the custom orchestrator to proactively scale pods or throttle lower-priority workloads to guarantee high availability for critical services.
+                    </p>
                     <div style="margin-top: 15px;">
                         <span class="tag">Kubernetes</span>
                         <span class="tag">Python</span>
                         <span class="tag">LSTM</span>
-                        <span class="tag">Minikube</span>
                         <span class="tag">Docker</span>
-                        <span class="tag">Priority-Based Scheduling</span>
-                    </div>
-                </div>
-                
-                 <div class="project-card">
-                    <div class="project-header">
-                        <div>
-                            <h3 class="project-title">Smart City Control Dashboard</h3>
-                            <p class="project-meta">Web Development [2025-2026]</p>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Designed and developed a Smart City Control Dashboard for real-time monitoring of urban parameters including population metrics, traffic flow, energy consumption, air quality, utilities, and city alerts. Implemented a modular frontend using React and JavaScript, with Node.js-based backend services to handle data processing and API integration. Focused on responsive UI design, scalable architecture, and centralized visualization to support data-driven smart city management.
-                    <div style="margin-top: 15px;">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">React.js</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">AI & ML</span>
-                        <span class="tag">DataBase Management</span>
+                        <span class="tag">Minikube</span>
+                        <span class="tag">High Availability</span>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-header">
                         <div>
-                            <h3 class="project-title">Machine Learning for Flight Navigation Optimization</h3>
-                            <p class="project-meta">Python | AI & ML | Blender| 2024-2025</p>
+                            <h3 class="project-title">VitalsGuard: AI-Based Vital Analysis &amp; Health Prediction System</h3>
+                            <p class="project-meta">Python | FastAPI | Phidata | React | LSTM | [2026]</p>
                         </div>
                         <div>
-                            <a href="https://github.com/monish732/Flight-Navigation-Optimization" target="_blank" class="github-link">
+                            <a href="https://github.com/monish732/Dev-Hub" target="_blank" class="github-link">
                             View on GitHub
                             </a>
                         </div>
                     </div>
                     <p class="project-description">
-                        Developed machine learning solutions for real-world domains such as aircraft navigation and food distribution by building a data-driven model to optimize flight paths based on terrain data, distance, and weather conditions. Implemented route planning algorithms, obstacle avoidance logic, and resource allocation strategies using Python, geospatial libraries, and lightweight AI frameworks.
-                    <div style="margin-top: 15px;">
-                        <span class="tag">Python</span>
-                        <span class="tag">Machine Learning</span>
-                        <span class="tag">Data Science</span>
-                        <span class="tag">Geospatial Analysis</span>
-                        <span class="tag">Optimization</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <div>
-                            <h3 class="project-title">Soil Moisture Analysis & Agricultural Robotics</h3>
-                            <p class="project-meta">R-Programming | Sensor Integration | 2024</p>
-                        </div>
-                         <div>
-                            <a href="https://github.com/monish732/Soil-Moisture-Rover" target="_blank" class="github-link">
-                            View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Designed and built an autonomous robot to measure and map soil moisture levels across agricultural fields. Utilized IoT sensors for data collection and MATLAB for real-time data visualization and statistical analysis. Applied data science techniques to identify patterns and provide actionable insights for improving irrigation efficiency and supporting precision agriculture decisions.
+                        Developed a virtual health companion for real-time vital parameters analysis (Heart Rate, SpO₂, ECG, Temperature). Engineered a multi-agent debate system using Phidata to reach consensus on health diagnoses alongside an LSTM engine for time-series trend forecasting. Built an interactive React dashboard featuring a 2D digital twin visual body scanning animation, early-warning alerts, and an interactive health simulator.
                     </p>
                     <div style="margin-top: 15px;">
-                        <span class="tag">MATLAB</span>
-                        <span class="tag">Data Science</span>
-                        <span class="tag">Robotics</span>
-                        <span class="tag">IoT Sensors</span>
-                        <span class="tag">Statistical Analysis</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Phidata</span>
+                        <span class="tag">React</span>
+                        <span class="tag">LSTM</span>
+                        <span class="tag">Agentic AI</span>
+                        <span class="tag">Digital Twin</span>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <div>
-                            <h3 class="project-title">Academic-AI-Chatbot</h3>
-                            <p class="project-meta">School Project | Python | NLP | 2023</p>
+                <div id="more-projects" class="more-projects-container">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">SmartPredict 2.0: Predictive Machine Breakdown System</h3>
+                                <p class="project-meta">XGBoost | TensorFlow | FastAPI | Streamlit | SHAP | [2026]</p>
+                            </div>
+                            <div>
+                                <a href="https://github.com/monish732/Predictive-Machine-Breakdown" target="_blank" class="github-link">
+                                View on GitHub
+                                </a>
+                            </div>
                         </div>
-                        <div>
-                            <a href="https://github.com/monish732/Academic-AI-Chatbot" target="_blank" class="github-link">
-                            View on GitHub
-                            </a>
+                        <p class="project-description">
+                            Developed a predictive maintenance dashboard to forecast machinery bearing failures using real-time sensor metrics (vibration, temperature, rpm). Engineered an ML ensemble integrating XGBoost and DNN for failure probability, Isolation Forest for anomalies, and Random Forest for estimating Remaining Useful Life (RUL). Unified a Streamlit UI with a FastAPI backend, integrating SHAP explainability and a maintenance scheduling optimizer.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="tag">XGBoost</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">Streamlit</span>
+                            <span class="tag">SHAP Explainability</span>
+                            <span class="tag">Predictive Maintenance</span>
                         </div>
                     </div>
-                    <p class="project-description">
-                         Developed a full-featured AI-powered School Chatbot to answer student queries about school activities, subjects, facilities, schedules, and more. Implemented using Python and Flask, combining TF-IDF + Logistic Regression for intent classification and Sentence Transformers for semantic search fallback.This project demonstrates practical application of NLP, ML, and full-stack web development in an educational context. This project sparked my initial interest in AI and conversational systems.
-                    </p>
                     
-                    <div style="margin-top: 15px;">
-                        <span class="tag">Python</span>
-                        <span class="tag">Pattern Matching</span>
-                        <span class="tag">Text Processing</span>
-                        <span class="tag">AI&ML</span>
-                        <span class="tag">NLP</span>
+                     <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Smart City Control Dashboard</h3>
+                                <p class="project-meta">Web Development [2025-2026]</p>
+                            </div>
+                            <div>
+                                <a href="https://github.com/monish732/smart-city-dashboard" target="_blank" class="github-link">
+                                View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            Designed and developed a Smart City Control Dashboard for real-time monitoring of urban parameters including population metrics, traffic flow, energy consumption, air quality, utilities, and city alerts. Implemented a modular frontend using React and JavaScript, with Node.js-based backend services to handle data processing and API integration. Focused on responsive UI design, scalable architecture, and centralized visualization to support data-driven smart city management.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">React.js</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">AI &amp; ML</span>
+                            <span class="tag">DataBase Management</span>
+                        </div>
                     </div>
+    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Machine Learning for Flight Navigation Optimization</h3>
+                                <p class="project-meta">Python | AI &amp; ML | Blender| 2024-2025</p>
+                            </div>
+                            <div>
+                                <a href="https://github.com/monish732/Flight-Navigation-Optimization" target="_blank" class="github-link">
+                                View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            Applied machine learning to real-world domains like aircraft navigation and food distribution. Developed a data-driven model to optimize flight paths based on terrain data, distance, and weather conditions. Implemented route planning algorithms, obstacle avoidance logic, and resource allocation strategies using Python, geospatial libraries, and lightweight AI frameworks.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="tag">Python</span>
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">Data Science</span>
+                            <span class="tag">Geospatial Analysis</span>
+                            <span class="tag">Optimization</span>
+                        </div>
+                    </div>
+    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Soil Moisture Analysis &amp; Agricultural Robotics</h3>
+                                <p class="project-meta">R-Programming | Sensor Integration | 2024</p>
+                            </div>
+                            <div>
+                                <a href="https://github.com/monish732/Soil-Moisture-Rover" target="_blank" class="github-link">
+                                View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            Designed and built an autonomous robot to measure and map soil moisture levels across agricultural fields. Utilized IoT sensors for data collection and MATLAB for real-time data visualization and statistical analysis. Applied data science techniques to identify patterns and provide actionable insights for improving irrigation efficiency and supporting precision agriculture decisions.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="tag">MATLAB</span>
+                            <span class="tag">Data Science</span>
+                            <span class="tag">Robotics</span>
+                            <span class="tag">IoT Sensors</span>
+                            <span class="tag">Statistical Analysis</span>
+                        </div>
+                    </div>
+    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Academic-AI-Chatbot</h3>
+                                <p class="project-meta">School Project | Python | NLP | 2023</p>
+                            </div>
+                            <div>
+                                <a href="https://github.com/monish732/Academic-AI-Chatbot" target="_blank" class="github-link">
+                                View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                             Developed a full-featured AI-powered School Chatbot to answer student queries about school activities, subjects, facilities, schedules, and more. Implemented using Python and Flask, combining TF-IDF + Logistic Regression for intent classification and Sentence Transformers for semantic search fallback.This project demonstrates practical application of NLP, ML, and full-stack web development in an educational context. This project sparked my initial interest in AI and conversational systems.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pattern Matching</span>
+                            <span class="tag">Text Processing</span>
+                            <span class="tag">AI&amp;ML</span>
+                            <span class="tag">NLP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toggle-btn-container">
+                    <button id="toggle-projects-btn" class="toggle-btn">
+                        <span>Show More Projects</span>
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </section>
 
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="cert-card">
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42-3.1-2.92-5.5-6-5.5a6 6 0 0 0-6 6c0 .4.04.8.1 1.2A4.5 4.5 0 0 0 4 21h13.5z"/>
+                            </svg>
+                        </div>
+                        <div class="cert-info">
+                            <h3 class="cert-title">GCP Associate Cloud Engineer</h3>
+                            <p class="cert-issuer">Google<span style="color: #9ca3af; font-weight: normal; margin-left: 6px;">| 2026</span></p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <div class="cert-info">
+                            <h3 class="cert-title">Networking Basics</h3>
+                            <p class="cert-issuer">Cisco<span style="color: #9ca3af; font-weight: normal; margin-left: 6px;">| 2026</span></p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 10V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4z"/>
+                                <line x1="12" y1="14" x2="12" y2="20"/>
+                                <line x1="9" y1="2" x2="9" y2="4"/>
+                                <line x1="15" y1="2" x2="15" y2="4"/>
+                            </svg>
+                        </div>
+                        <div class="cert-info">
+                            <h3 class="cert-title">Introduction to IoT and Digital Transformation</h3>
+                            <p class="cert-issuer">Cisco<span style="color: #9ca3af; font-weight: normal; margin-left: 6px;">| 2026</span></p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <div class="cert-info">
+                            <h3 class="cert-title">TCS iON Career Edge - Young Professional</h3>
+                            <p class="cert-issuer">TCS<span style="color: #9ca3af; font-weight: normal; margin-left: 6px;">| 2025</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section class="section">
                 <div class="contact-info">
                     <h2>Let's Connect</h2>
                     <p>Thank you for visiting my profile. I would welcome the opportunity to discuss how my skills and experience in machine learning, data science, and AI-driven hardware system design can contribute to your organization.</p>
-                    <p style="margin-top: 25px; font-style: italic; opacity: 0.9;">The information furnished above is true to the best of my knowledge.</p>
                 </div>
             </section>
         </div>
     </div>
+    <script>
+        const toggleBtn = document.getElementById('toggle-projects-btn');
+        const moreProjects = document.getElementById('more-projects');
+
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = moreProjects.classList.contains('expanded');
+            if (!isExpanded) {
+                moreProjects.classList.add('expanded');
+                toggleBtn.classList.add('expanded');
+                toggleBtn.querySelector('span').textContent = 'Show Less Projects';
+            } else {
+                moreProjects.classList.remove('expanded');
+                toggleBtn.classList.remove('expanded');
+                toggleBtn.querySelector('span').textContent = 'Show More Projects';
+                
+                // Smooth scroll back to the top of the toggle button container
+                toggleBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    </script>
 </body>
 
 </html>
-
-
-
-
-
-
